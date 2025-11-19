@@ -6,7 +6,7 @@
 # ============================================================
 
 # Compiler to use
-CC = clang
+CC = gcc
 
 # Compiler flags:
 #  -std=c99 : use C99 standard
@@ -18,6 +18,14 @@ OBJS = main.o manager.o customer.o data.o util.o
 
 # Final output executable name
 TARGET = coffee_shop
+
+# ------------------------------------------------------------
+# If the system is macOS, use clang instead of gcc
+# ------------------------------------------------------------
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    CC = clang
+endif
 
 # ------------------------------------------------------------
 # Build final executable from all object files
